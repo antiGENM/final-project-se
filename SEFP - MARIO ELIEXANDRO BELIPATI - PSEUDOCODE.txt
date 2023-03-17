@@ -1,37 +1,35 @@
-PROGRAM PeminjamanBuku
+PROGRAM Perpustakaan
 
 BEGIN
     READ AND WRITE "memberID" with number
-    AUTH "memberID"
-    READ AND WRITE "bookTitle" with string
-    READ "bookStatus"
-    IF "bookStatus" = "available"
-        PRINT "Konfirmasi peminjaman"
-    ELSE
-        READ AND WRITE "bookTitle"
-    ENDIF
-    WRITE "bookStatus" = "borrowed"
-    READ AND WRITE "dueDate" with date
-    PRINT "Struk Peminjaman"
-    PRINT "dueDate"
-END
-
-
-PROGRAM PengembalianBuku
-
-BEGIN
-    READ AND WRITE "memberID" with number
-    AUTH "memberID"
-    READ AND WRITE "bookTitle" with string
-    READ "bookStatus"
-    IF "bookStatus" = "borrowed"
-        PRINT "Konfirmasi pengembalian"
-    ELSE
-        READ AND WRITE "bookTitle"
-    ENDIF
-    IF "returnDate" > "dueDate"
-        CALCULATE "dendaTotal"
-    ENDIF
-    WRITE "bookStatus" = "available"  
-    PRINT "Struk Pengembalian"
+    WHILE "memberID" = invalid DO
+        READ AND WRITE "memberID" with number
+    PRINT "1. Peminjaman | 2. Pengembalian"
+    READ AND WRITE "opsi" with number
+    IF "opsi" = 1
+        READ AND WRITE "bookTitle" with string
+        READ "bookStatus"
+        IF "bookStatus" = "available"
+            PRINT "Konfirmasi peminjaman"
+        ELSE
+            READ AND WRITE "bookTitle"
+        ENDIF
+        WRITE "bookStatus" = "borrowed"
+        READ AND WRITE "dueDate" with date
+        PRINT "Struk Peminjaman"
+        PRINT "dueDate"
+    ELSE IF "opsi" = 2
+        READ AND WRITE "bookTitle" with string
+        READ "bookStatus"
+        IF "bookStatus" = "borrowed"
+            PRINT "Konfirmasi pengembalian"
+        ELSE
+            READ AND WRITE "bookTitle"
+        ENDIF
+        IF "returnDate" > "dueDate"
+            CALCULATE "dendaTotal"
+        ENDIF
+        WRITE "bookStatus" = "available"  
+        PRINT "Struk Pengembalian"
+    ENDIF        
 END
